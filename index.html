@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QR Studio - Create Your QR Code for Free</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <img src="logo.svg" alt="QR Studio Logo" />
+      <span>QR Studio</span>
+    </div>
+    <nav class="nav">
+     <div class="hamburger">☰</div>
+    </nav>
+  </header>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <button class="category active">URL</button>
+      <button class="category">VCARD</button>
+      <button class="category">TEXT</button>
+      <button class="category">E-MAIL</button>
+      <button class="category">SMS</button>
+      <button class="category">WIFI</button>
+      <button class="category">SOCIAL HANDLE</button>
+      <button class="category">ME-CARD</button>
+      <button class="category">LOCATION</button>
+      <button class="category">APP STORE</button>
+      <button class="category">EVENT</button>
+      <button class="category">PAYMENT</button>
+    </aside>
+
+    <!-- Input Section -->
+<section class="input-section">
+    <!-- Default (URL) Input Form -->
+    <div id="url-form" class="input-form">
+      <h2>Enter your text</h2>
+      <p>(Your QR Code will be generated automatically)</p>
+      <textarea id="qr-input" placeholder="Type something..."></textarea>
+      <button id="generate-btn">Generate</button>
+    </div>
+  
+    <!-- vCard Form -->
+    <div id="vcard-form" class="input-form" style="display: none;">
+      <h2>V-Card QR Code</h2>
+  
+      <label>Your Name:</label>
+      <div class="form-row">
+        <input type="text" id="first-name" placeholder="First name" />
+        <input type="text" id="last-name" placeholder="Last name" />
+      </div>
+  
+      <label>Contact:</label>
+      <input type="text" id="mobile" placeholder="Mobile" />
+      <div class="form-row">
+        <input type="text" id="phone" placeholder="Phone" />
+        <input type="text" id="fax" placeholder="Fax" />
+      </div>
+  
+      <label>Email:</label>
+      <input type="email" id="email" placeholder="your@email.com" />
+  
+      <label>Company:</label>
+      <div class="form-row">
+        <input type="text" id="company" placeholder="Company" />
+        <input type="text" id="job" placeholder="Your Job" />
+      </div>
+  
+      <label>Street:</label>
+      <input type="text" id="street" placeholder="Street" />
+  
+      <label>City:</label>
+      <div class="form-row">
+        <input type="text" id="city" placeholder="City" />
+        <input type="text" id="zip" placeholder="ZIP" />
+      </div>
+  
+      <label>State:</label>
+      <input type="text" id="state" placeholder="State" />
+  
+      <label>Country:</label>
+      <input type="text" id="country" placeholder="Country" />
+  
+      <label>Website:</label>
+      <input type="url" id="website" placeholder="www.your-website.com" />
+  
+      <button id="generate-vcard-btn" class="generate-button">
+        Generate QR Code
+      </button>
+    </div>
+
+    <!-- Email Form -->
+<div id="email-form" class="input-form" style="display: none;">
+    <h2>Email QR Code</h2>
+  
+    <label>To:</label>
+    <input type="email" id="email-to" placeholder="Recipient email address" />
+  
+    <label>Subject:</label>
+    <input type="text" id="email-subject" placeholder="Email subject" />
+  
+    <label>Message:</label>
+    <textarea id="email-body" placeholder="Your message..."></textarea>
+  
+    <button id="generate-email-btn" class="generate-button">Generate QR Code</button>
+  </div>
+  
+  <!-- SMS Form -->
+<div id="sms-form" class="input-form" style="display: none;">
+    <h2>SMS QR Code</h2>
+    <label>Phone Number:</label>
+    <input type="text" id="sms-number" placeholder="e.g. +1234567890" />
+    <label>Message:</label>
+    <textarea id="sms-message" placeholder="Type your message..."></textarea>
+    <button id="generate-sms-btn" class="generate-button">Generate QR Code</button>
+  </div>
+
+  <!-- WiFi Form -->
+<div id="wifi-form" class="input-form" style="display: none;">
+    <h2>WiFi QR Code</h2>
+    <label>Network Name (SSID):</label>
+    <input type="text" id="wifi-ssid" placeholder="WiFi Network Name" />
+    <label>Password:</label>
+    <input type="text" id="wifi-password" placeholder="WiFi Password" />
+    <label>Encryption:</label>
+    <select id="wifi-encryption">
+      <option value="WPA">WPA/WPA2</option>
+      <option value="WEP">WEP</option>
+      <option value="nopass">None</option>
+    </select>
+    <button id="generate-wifi-btn" class="generate-button">Generate QR Code</button>
+  </div>
+
+  
+  <!-- Social Media Handle Form -->
+<div id="social-form" class="input-form" style="display: none;">
+    <h2>Social Media QR Code</h2>
+    <label>Platform:</label>
+    <select id="social-platform">
+      <option value="https://instagram.com/">Instagram</option>
+      <option value="https://twitter.com/">Twitter (X)</option>
+      <option value="https://facebook.com/">Facebook</option>
+      <option value="https://linkedin.com/in/">LinkedIn</option>
+      <option value="https://youtube.com/">YouTube</option>
+    </select>
+    <label>Username / Handle:</label>
+    <input type="text" id="social-username" placeholder="e.g. yourusername" />
+    <button id="generate-social-btn" class="generate-button">Generate QR Code</button>
+  </div>
+
+    <!-- MeCard Form -->
+    <div id="mecard-form" class="input-form" style="display: none;">
+        <h2>ME-CARD QR Code</h2>
+      
+        <label>Name:</label>
+        <input type="text" id="mecard-name" placeholder="Full Name" />
+      
+        <label>Phone:</label>
+        <input type="tel" id="mecard-phone" placeholder="Phone Number" />
+      
+        <label>Email:</label>
+        <input type="email" id="mecard-email" placeholder="your@email.com" />
+      
+        <label>URL:</label>
+        <input type="url" id="mecard-url" placeholder="https://example.com" />
+      
+        <label>Address:</label>
+        <input type="text" id="mecard-address" placeholder="Address" />
+      
+        <button id="generate-mecard-btn">Generate QR Code</button>
+      </div>
+
+    <!-- Location Form -->
+    <div id="location-form" class="input-form" style="display: none;">
+        <h2>Location QR Code</h2>
+      
+        <label>Latitude:</label>
+        <input type="text" id="location-lat" placeholder="e.g. 37.7749" />
+      
+        <label>Longitude:</label>
+        <input type="text" id="location-lng" placeholder="e.g. -122.4194" />
+      
+        <button id="generate-location-btn">Generate QR Code</button>
+      </div>
+
+
+    <!-- Payment Form -->
+    <div id="payment-form" class="input-form" style="display: none;">
+        <h2>Payment QR Code</h2>
+      
+        <label>Amount:</label>
+        <input type="text" id="payment-amount" placeholder="e.g. 10.00" />
+      
+        <label>Currency:</label>
+        <input type="text" id="payment-currency" placeholder="e.g. USD" />
+      
+        <label>Message:</label>
+        <textarea id="payment-message" placeholder="Payment for..."></textarea>
+      
+        <button id="generate-payment-btn">Generate QR Code</button>
+      </div> 
+        
+
+
+
+
+    <!-- appstore form -->
+    <div id="appstore-form" class="input-form" style="display: none;">
+        <h2>App Store QR Code</h2>
+        <label for="appstore-url">App Store URL:</label>
+        <input type="url" id="appstore-url" placeholder="https://apps.apple.com/app/idXXXXXX" />
+        <button id="generate-appstore-btn">Generate QR Code</button>
+      </div>
+
+    <!-- Event Form -->  
+    <div id="event-form" class="input-form" style="display: none;">
+        <h2>Event QR Code</h2>
+      
+        <label>Event Title:</label>
+        <input type="text" id="event-title" placeholder="Event Title" />
+      
+        <label>Start Date & Time:</label>
+        <input type="datetime-local" id="event-start" />
+      
+        <label>End Date & Time:</label>
+        <input type="datetime-local" id="event-end" />
+      
+        <label>Location:</label>
+        <input type="text" id="event-location" placeholder="Event Location" />
+      
+        <label>Description:</label>
+        <textarea id="event-description" placeholder="Details about the event..."></textarea>
+      
+        <button id="generate-event-btn">Generate QR Code</button>
+      </div>
+          
+  
+  
+  
+    <!-- QR output section (shared) -->
+    <div id="qr-code"></div>
+  </section>
+  
+      
+  </div>
+
+
+
+    <!-- QR Code Section -->
+
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

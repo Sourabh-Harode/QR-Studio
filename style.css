@@ -1,0 +1,167 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f6fa;
+    color: #333;
+  }
+  
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #eaf2ff;
+    padding: 15px 30px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    font-size: 35px;
+    font-weight: bold;
+    color: #527bd3;
+  }
+  
+  .logo img {
+    height: 50px;
+    margin-right: 20px;
+  }
+  
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Main layout */
+  .container {
+    display: flex;
+    padding: 20px 30px;
+    gap: 30px;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .category {
+    background: none;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+    font-weight: 500;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #fff;
+    transition: 0.2s;
+  }
+  
+  .category:hover,
+  .category.active {
+    border-color: #007bff;
+    background-color: #eaf2ff;
+  }
+  
+  /* Input Section */
+  .input-section {
+    flex: 1;
+  }
+  
+  .input-section h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  
+  .input-section p {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 10px;
+  }
+  
+  .input-form textarea,
+  .input-form input,
+  .input-form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  .input-form .form-row {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .input-form .form-row input {
+    flex: 1;
+  }
+  
+  .generate-button,
+  #generate-btn,
+  #generate-vcard-btn,
+  #generate-email-btn,
+  #generate-sms-btn,
+  #generate-wifi-btn,
+  #generate-social-btn,
+  #generate-mecard-btn,
+  #generate-location-btn,
+  #generate-payment-btn,
+  #generate-appstore-btn,
+  #generate-event-btn {
+    background-color: #00aeef;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+  }
+  
+  .generate-button:hover,
+  #generate-btn:hover,
+  #generate-vcard-btn:hover,
+  #generate-email-btn:hover,
+  #generate-sms-btn:hover,
+  #generate-wifi-btn:hover,
+  #generate-social-btn:hover,
+  #generate-mecard-btn:hover,
+  #generate-location-btn:hover,
+  #generate-payment-btn:hover,
+  #generate-appstore-btn:hover,
+  #generate-event-btn:hover {
+    background-color: #008fc4;
+  }
+  
+  #qr-code {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  #qr-code canvas,
+  #qr-code img {
+    display: block;
+    margin: auto;
+  }
+  
