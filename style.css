@@ -24,23 +24,69 @@
     z-index: 1000;
   }
   
-  .logo {
+  .logo-block {
     display: flex;
     align-items: center;
     font-size: 35px;
     font-weight: bold;
     color: #527bd3;
   }
-  
-  .logo img {
-    height: 50px;
-    margin-right: 20px;
+  .logo-block:hover{
+    color: #0056b3;
+    transform: scale3d(1.05, 1.05, 1);
+    transition: all 0.3s ease;
+    text-shadow: #ffffff 0px 0px 5px;
   }
   
+  .logo-block img {
+    height: 60px;
+    margin-right: 15px;
+  }
+    .logo-block img:hover {
+        transform: scale(1.05);
+        transition: all 0.3s ease;
+    }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+  
+  .site-name {
+    font-size: 40px;
+    font-weight: bold;
+    color: #527bd3;
+  }
+    .site-name:hover {
+        color: #0056b3;
+        transform: scale3d(1.05, 1.05, 1);
+        transition: all 0.3s ease;
+        text-shadow: #ffffff 0px 0px 5px;
+    }
+
+  .tagline {
+    font-size: 20px;
+    color: #080707;
+    font-weight: 100;
+  }  
+    
+
+
+
   .nav {
     display: flex;
     align-items: center;
     gap: 10px;
+  }
+  
+
+
+  .tagline {
+    font-size: 6px;
+    color: #333;
+    font-weight: 500;
+
   }
   
   /* Main layout */
@@ -137,6 +183,9 @@
     align-items: center;
     justify-content: center;
     transition: background-color 0.2s ease;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    margin-left: 41.5%;
   }
   
   .generate-button:hover,
@@ -154,14 +203,253 @@
     background-color: #008fc4;
   }
   
+
+
+
+
+  
+  #clear-vcard-btn,
+  #clear-email-btn,
+  #clear-sms-btn,
+  #clear-wifi-btn,
+  #clear-social-btn,
+  #clear-mecard-btn,
+  #clear-location-btn,
+  #clear-payment-btn,
+  #clear-appstore-btn,
+  #clear-event-btn {
+    background-color: #ff8989;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 40px;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+    margin-top: 0px;
+    
+  }
+    #clear-vcard-btn:hover,
+    #clear-email-btn:hover,
+    #clear-sms-btn:hover,
+    #clear-wifi-btn:hover,
+    #clear-social-btn:hover,
+    #clear-mecard-btn:hover,
+    #clear-location-btn:hover,
+    #clear-payment-btn:hover,
+    #clear-appstore-btn:hover,
+    #clear-event-btn:hover {
+      background-color: #de5151;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
   #qr-code {
     margin-top: 20px;
     text-align: center;
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   }
   
+  #download-btn {
+    background-color: #00aeef;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 41.5%;
+  }
+
+  #download-btn:hover {
+    background-color: #008fc4;
+  }
+
+
+
+
+
+
+
+  #reset-btn {
+    background-color: #ff8989;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 40px;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+    margin-top: 0px;
+  }
+
+  #reset-btn:hover {
+    background-color: #de5151;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
   #qr-code canvas,
   #qr-code img {
     display: block;
     margin: auto;
+    width: 200px;
+    height: 200px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    border-margin: 10px;
+
   }
+  
+
+    /* colour settings section */
+    .color-settings {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: center;
+        background: #eaf2ff;
+        padding: 1.25rem 1.5rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        font-family: 'Segoe UI', sans-serif;
+        margin: auto;
+      }
+      
+      .input-group {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: white;
+        padding: 0.4rem 1rem;
+        border-radius: 999px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+      }
+      
+      .input-group label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #333;
+        white-space: nowrap;
+      }
+      
+      /* dropdown */
+      .input-group select {
+        border: none;
+        border-radius: 999px;
+        padding: 0.35rem 1rem;
+        font-size: 14px;
+        background-color: #f0f0f0;
+        appearance: none;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+      
+      .input-group select:hover {
+        background-color: #e0e0e0;
+        size: 1.05;
+        transform: scale(1.05);
+      }
+      
+      /* color picker */
+      .input-group input[type="color"] {
+        border: none;
+        width: 20px;
+        height: 25px;
+        border-radius: 999px;
+        padding: 0;
+        cursor: pointer;
+        background: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .input-group input[type="color"]:hover {
+        background-color: #e0e0e0;
+        size: 1.05;
+        transform: scale(1.05);
+      }
+      
+     
+      .footer {
+        background-color: #1f2937;
+        color: #f3f4f6;
+        padding: 2rem 1rem;
+        text-align: center;
+        font-size: 0.9rem;
+      }
+      
+      .footer-container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      
+      .footer-logo h2 {
+        margin-bottom: 0.3rem;
+        font-size: 1.5rem;
+        color: #ffffff;
+      }
+      
+      .footer-logo p {
+        margin-bottom: 1rem;
+        color: #d1d5db;
+      }
+      
+      .footer-links {
+        margin: 1rem 0;
+      }
+      
+      .footer-links a {
+        margin: 0 10px;
+        color: #9ca3af;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      
+      .footer-links a:hover {
+        color: #ffffff;
+      }
+      
+      .footer-copy {
+        color: #6b7280;
+      }
+      
+      
+
+
+
+
+ 
   

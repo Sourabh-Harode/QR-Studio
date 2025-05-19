@@ -9,10 +9,14 @@
 <body>
   <!-- Header -->
   <header class="header">
-    <div class="logo">
-      <img src="logo.svg" alt="QR Studio Logo" />
-      <span>QR Studio</span>
+    <div class="logo-block">
+        <img src="logo.svg" alt="QR Studio Logo" />
+        <div class="logo-text">
+          <span class="site-name">QR Studio</span>
+          <span class="tagline"> Create Your QR Code for Free</span>
+        </div>
     </div>
+    
     <nav class="nav">
      <div class="hamburger">☰</div>
     </nav>
@@ -38,12 +42,12 @@
 
     <!-- Input Section -->
 <section class="input-section">
-    <!-- Default (URL) Input Form -->
+    <!-- URL Input Form -->
     <div id="url-form" class="input-form">
       <h2>Enter your text</h2>
       <p>(Your QR Code will be generated automatically)</p>
       <textarea id="qr-input" placeholder="Type something..."></textarea>
-      <button id="generate-btn">Generate</button>
+      <button id="generate-btn">Generate QR code</button>
     </div>
   
     <!-- vCard Form -->
@@ -89,6 +93,8 @@
   
       <label>Website:</label>
       <input type="url" id="website" placeholder="www.your-website.com" />
+
+      <button type="button" id="clear-vcard-btn">Clear</button>
   
       <button id="generate-vcard-btn" class="generate-button">
         Generate QR Code
@@ -109,6 +115,7 @@
     <textarea id="email-body" placeholder="Your message..."></textarea>
   
     <button id="generate-email-btn" class="generate-button">Generate QR Code</button>
+    <button type="button" id="clear-Email-btn">Clear</button>
   </div>
   
   <!-- SMS Form -->
@@ -118,6 +125,7 @@
     <input type="text" id="sms-number" placeholder="e.g. +1234567890" />
     <label>Message:</label>
     <textarea id="sms-message" placeholder="Type your message..."></textarea>
+    <button type="button" id="clear-sms-btn">Clear</button>
     <button id="generate-sms-btn" class="generate-button">Generate QR Code</button>
   </div>
 
@@ -134,6 +142,7 @@
       <option value="WEP">WEP</option>
       <option value="nopass">None</option>
     </select>
+    <button type="button" id="clear-wifi-btn">Clear</button>
     <button id="generate-wifi-btn" class="generate-button">Generate QR Code</button>
   </div>
 
@@ -151,6 +160,7 @@
     </select>
     <label>Username / Handle:</label>
     <input type="text" id="social-username" placeholder="e.g. yourusername" />
+    <button type="button" id="clear-social-btn">Clear</button>
     <button id="generate-social-btn" class="generate-button">Generate QR Code</button>
   </div>
 
@@ -172,6 +182,8 @@
       
         <label>Address:</label>
         <input type="text" id="mecard-address" placeholder="Address" />
+
+        <button type="button" id="clear-mecard-btn">Clear</button>
       
         <button id="generate-mecard-btn">Generate QR Code</button>
       </div>
@@ -185,6 +197,8 @@
       
         <label>Longitude:</label>
         <input type="text" id="location-lng" placeholder="e.g. -122.4194" />
+
+        <button type="button" id="clear-location-btn">Clear</button>
       
         <button id="generate-location-btn">Generate QR Code</button>
       </div>
@@ -202,6 +216,7 @@
       
         <label>Message:</label>
         <textarea id="payment-message" placeholder="Payment for..."></textarea>
+        <button type="button" id="clear-payment-btn">Clear</button>
       
         <button id="generate-payment-btn">Generate QR Code</button>
       </div> 
@@ -215,7 +230,10 @@
         <h2>App Store QR Code</h2>
         <label for="appstore-url">App Store URL:</label>
         <input type="url" id="appstore-url" placeholder="https://apps.apple.com/app/idXXXXXX" />
+
+        <button type="button" id="clear-appstore-btn">Clear</button>
         <button id="generate-appstore-btn">Generate QR Code</button>
+
       </div>
 
     <!-- Event Form -->  
@@ -243,20 +261,79 @@
   
   
   
-    <!-- QR output section (shared) -->
+    <!-- QR output section -->
+    
     <div id="qr-code"></div>
-  </section>
-  
-      
+    <button id="download-btn" style="display: none;">Download QR Code</button>
+    <div>
+
+        <!-- Color Settings -->
+        <div class="color-settings">
+            <div class="input-group">
+              <label for="color-type">Color Type:</label>
+              <select id="color-type">
+                <option value="solid">Solid</option>
+                <option value="gradient">Gradient</option>
+              </select>
+            </div>
+          
+            <div class="input-group">
+              <label for="color-1">Primary:</label>
+              <input type="color" id="color-1" value="#000000" />
+            </div>
+          
+            <div class="input-group">
+              <label for="color-2">Secondary:</label>
+              <input type="color" id="color-2" value="#000000" />
+            </div>
+          
+            <button id="reset-btn">Reset</button>
+          </div>
+          
+
+        
+
+
+
+
+
+
+  </section>    
   </div>
 
 
 
-    <!-- QR Code Section -->
+  
+
+
+
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <h2>QR Studio</h2>
+        <p>Generate customized QR codes instantly.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+      <div class="footer-copy">
+        <p>&copy; 2025 QR Studio. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  
+    
 
   
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+
   <script src="script.js"></script>
 </body>
 </html>

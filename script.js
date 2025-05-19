@@ -1,20 +1,29 @@
 // Wait for DOM to load
 document.addEventListener("DOMContentLoaded", () => {
     const categories = document.querySelectorAll(".category");
-    const urlForm = document.getElementById("url-form");
-    const vcardForm = document.getElementById("vcard-form");
-    const emailForm = document.getElementById("email-form");
-    const smsForm = document.getElementById("sms-form");
-    const wifiForm = document.getElementById("wifi-form");
-    const socialForm = document.getElementById("social-form");
-    const locationForm = document.getElementById("location-form");
-    const appstoreForm = document.getElementById("appstore-form");
-    const eventForm = document.getElementById("event-form");
-    const paymentForm = document.getElementById("payment-form");
-    const mecForm = document.getElementById("mecard-form");
+    const formMap = {
+      "URL": "url-form",
+      "TEXT": "url-form",
+      "VCARD": "vcard-form",
+      "E-MAIL": "email-form",
+      "SMS": "sms-form",
+      "WIFI": "wifi-form",
+      "SOCIAL HANDLE": "social-form",
+      "LOCATION": "location-form",
+      "APP STORE": "appstore-form",
+      "EVENT": "event-form",
+      "PAYMENT": "payment-form",
+      "ME-CARD": "mecard-form"
+    };
     const qrContainer = document.getElementById("qr-code");
+    const downloadBtn = document.getElementById("download-btn");
+    const colorTypeSelect = document.getElementById("color-type");
+    const color1Input = document.getElementById("color-1");
+    const color2Input = document.getElementById("color-2");
+    
   
-    // Handle category switching
+  
+    // category switching
     categories.forEach(button => {
       button.addEventListener("click", () => {
         categories.forEach(btn => btn.classList.remove("active"));
@@ -23,346 +32,234 @@ document.addEventListener("DOMContentLoaded", () => {
         const selected = button.textContent.trim();
   
         // Hide all forms
-        urlForm.style.display = "none";
-        vcardForm.style.display = "none";
-        emailForm.style.display = "none";
-        smsForm.style.display = "none";
-        wifiForm.style.display = "none";
-        socialForm.style.display = "none";
-        locationForm.style.display = "none";
-        appstoreForm.style.display = "none";
-        eventForm.style.display = "none";
-        paymentForm.style.display = "none";
-        mecForm.style.display = "none";
+        Object.values(formMap).forEach(id => {
+          const form = document.getElementById(id);
+          if (form) form.style.display = "none";
+        });
         qrContainer.innerHTML = "";
+        downloadBtn.style.display = "none";
   
         // Show the selected form
-        if (selected === "VCARD") {
-          vcardForm.style.display = "block";
-        } else if (selected === "E-MAIL") {
-          emailForm.style.display = "block";
-        } else if (selected === "SMS") {
-          smsForm.style.display = "block";
-        } else if (selected === "WIFI") {
-          wifiForm.style.display = "block";
-        } else if (selected === "SOCIAL HANDLE") { 
-          socialForm.style.display = "block";
-        } else if (selected === "URL" || selected === "TEXT") {
-          urlForm.style.display = "block";
-        } else if (selected === "LOCATION") {
-          locationForm.style.display = "block";
-        } else if (selected === "APP STORE") {
-          appstoreForm.style.display = "block";
-        } else if (selected === "EVENT") {
-          eventForm.style.display = "block";
-        } else if (selected === "PAYMENT") {
-          paymentForm.style.display = "block";
-        } else if (selected === "ME-CARD") {
-          mecForm.style.display = "block";
-        } 
+        const selectedFormId = formMap[selected];
+        if (selectedFormId) {
+          const form = document.getElementById(selectedFormId);
+          if (form) form.style.display = "block";
+        }
       });
     });
   
+    const get = id => document.getElementById(id)?.value?.trim() || "";
 
+
+
+
+  
+
+ 
+
+
+    // QR code generation 
+    const createQRCode = text => {
+      if (!text) return;
+      qrContainer.innerHTML = "";
+  
+      const colorType = colorTypeSelect?.value || "solid";
+      const color1 = color1Input?.value || "#000000";
+      const color2 = color2Input?.value || "#000000";
+      
+  
+      if (colorType === "gradient") {
+        const qr = qrcode(0, 'H');
+        qr.addData(text);
+        qr.make();
+  
+        const size = 10;
+        const count = qr.getModuleCount();
+        const canvasSize = size * count;
+  
+        const canvas = document.createElement("canvas");
+        canvas.width = canvasSize;
+        canvas.height = canvasSize;
+        const ctx = canvas.getContext("2d");
+  
+        const gradient = ctx.createLinearGradient(0, 0, canvasSize, canvasSize);
+        gradient.addColorStop(0, color1);
+        gradient.addColorStop(1, color2);
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(0, 0, canvasSize, canvasSize);
+        ctx.fillStyle = gradient;
+  
+        for (let row = 0; row < count; row++) {
+          for (let col = 0; col < count; col++) {
+            if (qr.isDark(row, col)) {
+              ctx.fillRect(col * size, row * size, size, size);
+            }
+          }
+        }
+  
+        qrContainer.appendChild(canvas);
+      } else {
+        new QRCode(qrContainer, {
+          text,
+          width: 200,
+          height: 200,
+          colorDark: color1,
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      }
+      
+  
+      setTimeout(() => downloadBtn.style.display = "inline-block", 100);
+    };
+  
+    // Download QR code as image
+    downloadBtn?.addEventListener("click", () => {
+      const img = qrContainer.querySelector("canvas") || qrContainer.querySelector("img");
+      if (!img) return;
+      const link = document.createElement("a");
+      link.href = img.toDataURL ? img.toDataURL("image/png") : img.src;
+      link.download = "qr-code.png";
+      link.click();
+    });
+  
     // URL QR Code
     const urlInput = document.getElementById("qr-input");
     const generateBtn = document.getElementById("generate-btn");
+    generateBtn?.addEventListener("click", () => createQRCode(get("qr-input")));
+    urlInput?.addEventListener("input", () => createQRCode(get("qr-input")));
+
+    
   
-    function generateURLQRCode() {
-      qrContainer.innerHTML = "";
-      const text = urlInput.value.trim();
-      if (!text) return;
+    // vCard QR Code
+    document.getElementById("generate-vcard-btn")?.addEventListener("click", () => {
+      const vCard = `BEGIN:VCARD\nVERSION:3.0\nN:${get("last-name")};${get("first-name")}\nFN:${get("first-name")} ${get("last-name")}\nTEL;TYPE=cell:${get("mobile")}\nTEL;TYPE=work:${get("phone")}\nTEL;TYPE=fax:${get("fax")}\nEMAIL:${get("email")}\nORG:${get("company")}\nTITLE:${get("job")}\nADR:;;${get("street")};${get("city")};${get("state")};${get("zip")};${get("country")}\nURL:${get("website")}\nEND:VCARD`;
+      createQRCode(vCard);
+    });
   
-      new QRCode(qrContainer, {
-        text: text,
-        width: 200,
-        height: 200,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H,
-      });
-    }
+    // Email QR Code
+    document.getElementById("generate-email-btn")?.addEventListener("click", () => {
+      const to = get("email-to");
+      if (!to) return;
+      const subject = get("email-subject");
+      const body = get("email-body");
+      const mailtoLink = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      createQRCode(mailtoLink);
+    });
   
-    generateBtn.addEventListener("click", generateURLQRCode);
-    urlInput.addEventListener("input", generateURLQRCode);
+    // SMS QR Code
+    document.getElementById("generate-sms-btn")?.addEventListener("click", () => {
+      const number = get("sms-number");
+      if (!number) return;
+      const message = get("sms-message");
+      const smsText = `SMSTO:${number}:${message}`;
+      createQRCode(smsText);
+    });
+  
+    // WiFi QR Code
+    document.getElementById("generate-wifi-btn")?.addEventListener("click", () => {
+      const ssid = get("wifi-ssid");
+      if (!ssid) return;
+      const pass = get("wifi-password");
+      const enc = get("wifi-encryption");
+      const wifiText = `WIFI:T:${enc};S:${ssid};P:${pass};;`;
+      createQRCode(wifiText);
+    });
+  
+    // Social QR Code
+    document.getElementById("generate-social-btn")?.addEventListener("click", () => {
+      const username = get("social-username");
+      if (!username) return;
+      const platform = get("social-platform");
+      createQRCode(`${platform}${username}`);
+    });
+  
+    // MECARD QR Code
+    document.getElementById("generate-mecard-btn")?.addEventListener("click", () => {
+      const mecard = `MECARD:N:${get("mecard-name")};TEL:${get("mecard-phone")};EMAIL:${get("mecard-email")};URL:${get("mecard-url")};ADR:${get("mecard-address")};;`;
+      createQRCode(mecard);
+    });
+  
+    // Location QR Code
+    document.getElementById("generate-location-btn")?.addEventListener("click", () => {
+      const lat = get("location-lat");
+      const lng = get("location-lng");
+      createQRCode(`geo:${lat},${lng}`);
+    });
+  
+    // App Store QR Code
+    document.getElementById("generate-appstore-btn")?.addEventListener("click", () => {
+      createQRCode(get("appstore-url"));
+    });
+  
+    // Event QR Code
+    document.getElementById("generate-event-btn")?.addEventListener("click", () => {
+      const start = new Date(get("event-start")).toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+      const end = new Date(get("event-end")).toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+      const ical = `BEGIN:VEVENT\nSUMMARY:${get("event-title")}\nDTSTART:${start}\nDTEND:${end}\nLOCATION:${get("event-location")}\nDESCRIPTION:${get("event-description")}\nEND:VEVENT`;
+      createQRCode(ical);
+    });
+  
+    // Payment QR Code
+    document.getElementById("generate-payment-btn")?.addEventListener("click", () => {
+      const upi = `upi://pay?pa=${get("payment-upi")}&pn=${get("payment-name")}&am=${get("payment-amount")}&cu=INR`;
+      createQRCode(upi);
+    });
+  });
+  
+
+  // Reset QR code
+  document.getElementById("reset-btn")?.addEventListener("click", () => {
+    const input = document.getElementById("qr-input");
+    if (input) input.value = "";
+  
+    // Clear QR code output
+    document.getElementById("qr-code").innerHTML = "";
   
     
-
-
-
-    // vCard QR Code
-    const vcardBtn = document.getElementById("generate-vcard-btn");
   
-    vcardBtn.addEventListener("click", () => {
-      qrContainer.innerHTML = "";
+    // Reset color settings
+    const colorType = document.getElementById("color-type");
+    const color1 = document.getElementById("color-1");
+    const color2 = document.getElementById("color-2");
   
-      const vCard = `
-  BEGIN:VCARD
-  VERSION:3.0
-  N:${get("last-name")};${get("first-name")}
-  FN:${get("first-name")} ${get("last-name")}
-  TEL;TYPE=cell:${get("mobile")}
-  TEL;TYPE=work:${get("phone")}
-  TEL;TYPE=fax:${get("fax")}
-  EMAIL:${get("email")}
-  ORG:${get("company")}
-  TITLE:${get("job")}
-  ADR:;;${get("street")};${get("city")};${get("state")};${get("zip")};${get("country")}
-  URL:${get("website")}
-  END:VCARD
-      `.trim();
+    if (colorType) colorType.value = "solid";
+    if (color1) color1.value = "#000000";
+    if (color2) color2.value = "#000000";
+  });
   
-      new QRCode(qrContainer, {
-        text: vCard,
-        width: 200,
-        height: 200,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H,
-      });
+    // Clear form fields
+  function clearFormFields(formId) {
+    const form = document.getElementById(formId);
+    if (!form) return;
+  
+    const inputs = form.querySelectorAll("input, textarea, select");
+    inputs.forEach(input => {
+      if (input.type === "checkbox" || input.type === "radio") {
+        input.checked = false;
+      } else if (input.tagName === "SELECT") {
+        input.selectedIndex = 0;
+      } else {
+        input.value = "";
+      }
     });
   
-
-
-   
-    // Email QR Code
-    const emailGenerateBtn = document.getElementById("generate-email-btn");
+    // Clear QR output and hide download button
+    document.getElementById("qr-code").innerHTML = "";
+    document.getElementById("download-btn").style.display = "none";
   
-    emailGenerateBtn.addEventListener("click", () => {
-      qrContainer.innerHTML = "";
-  
-      const to = document.getElementById("email-to").value.trim();
-      const subject = document.getElementById("email-subject").value.trim();
-      const body = document.getElementById("email-body").value.trim();
-  
-      if (!to) return;
-  
-      const mailtoLink = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  
-      new QRCode(qrContainer, {
-        text: mailtoLink,
-        width: 200,
-        height: 200,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H,
-      });
-    });
-
-
-
-
-
-
-    // Helper function to get element values
-function get(id) {
-    return document.getElementById(id)?.value?.trim() || "";
   }
-
-
-
   
-  // Generate SMS QR Code
-  const smsBtn = document.getElementById("generate-sms-btn");
-  smsBtn?.addEventListener("click", () => {
-    qrContainer.innerHTML = "";
-    const number = get("sms-number");
-    const message = get("sms-message");
-    if (!number) return;
-    const smsText = `SMSTO:${number}:${message}`;
-    new QRCode(qrContainer, {
-      text: smsText,
-      width: 200,
-      height: 200,
-      colorDark: "#000",
-      colorLight: "#fff",
-      correctLevel: QRCode.CorrectLevel.H,
-    });
-  });
+  // Clear buttons for specific forms
+  document.getElementById("clear-vcard-btn")?.addEventListener("click", () => clearFormFields("vcard-form"));
+  document.getElementById("clear-email-btn")?.addEventListener("click", () => clearFormFields("email-form"));
+  document.getElementById("clear-sms-btn")?.addEventListener("click", () => clearFormFields("sms-form"));
+  document.getElementById("clear-wifi-btn")?.addEventListener("click", () => clearFormFields("wifi-form"));
+  document.getElementById("clear-social-btn")?.addEventListener("click", () => clearFormFields("social-form"));
+  document.getElementById("clear-location-btn")?.addEventListener("click", () => clearFormFields("location-form"));
+  document.getElementById("clear-appstore-btn")?.addEventListener("click", () => clearFormFields("appstore-form"));
+  document.getElementById("clear-event-btn")?.addEventListener("click", () => clearFormFields("event-form"));
+  document.getElementById("clear-payment-btn")?.addEventListener("click", () => clearFormFields("payment-form"));
+  document.getElementById("clear-mecard-btn")?.addEventListener("click", () => clearFormFields("mecard-form"));
   
-
-
-
-
-  // Generate WiFi QR Code
-  const wifiBtn = document.getElementById("generate-wifi-btn");
-  wifiBtn?.addEventListener("click", () => {
-    qrContainer.innerHTML = "";
-    const ssid = get("wifi-ssid");
-    const pass = get("wifi-password");
-    const enc = get("wifi-encryption");
-    if (!ssid) return;
-    const wifiText = `WIFI:T:${enc};S:${ssid};P:${pass};;`;
-    new QRCode(qrContainer, {
-      text: wifiText,
-      width: 200,
-      height: 200,
-      colorDark: "#000",
-      colorLight: "#fff",
-      correctLevel: QRCode.CorrectLevel.H,
-    });
-  });
-  
-
-
-
-
-
-  // Generate Social Handle QR Code
-  const socialBtn = document.getElementById("generate-social-btn");
-  socialBtn?.addEventListener("click", () => {
-    qrContainer.innerHTML = "";
-    const platform = document.getElementById("social-platform").value;
-    const username = get("social-username");
-    if (!username) return;
-    const socialURL = `${platform}${username}`;
-    new QRCode(qrContainer, {
-      text: socialURL,
-      width: 200,
-      height: 200,
-      colorDark: "#000",
-      colorLight: "#fff",
-      correctLevel: QRCode.CorrectLevel.H,
-    });
-  });
-
-
-
-
-
-  
-
-
-
-
-  // MECARD QR Code
-  document.getElementById("generate-mecard-btn")?.addEventListener("click", () => {
-    qrContainer.innerHTML = "";
-  
-    const mecard = `
-  MECARD:N:${get("mecard-name")};
-  TEL:${get("mecard-phone")};
-  EMAIL:${get("mecard-email")};
-  URL:${get("mecard-url")};
-  ADR:${get("mecard-address")};
-  ;`.trim();
-  
-    new QRCode(qrContainer, {
-      text: mecard,
-      width: 200,
-      height: 200,
-      colorDark: "#000",
-      colorLight: "#fff",
-      correctLevel: QRCode.CorrectLevel.H,
-    });
-  });
-  
-
-
-
-
-  // Location QR Code
-  document.getElementById("generate-location-btn")?.addEventListener("click", () => {
-    qrContainer.innerHTML = "";
-    const lat = get("location-lat");
-    const lng = get("location-lng");
-    const geo = `geo:${lat},${lng}`;
-  
-    new QRCode(qrContainer, {
-      text: geo,
-      width: 200,
-      height: 200,
-      colorDark: "#000",
-      colorLight: "#fff",
-      correctLevel: QRCode.CorrectLevel.H,
-    });
-  });
-  
-
-
-
-
-  // App Store QR Code (just a URL to app link)
-  document.getElementById("generate-appstore-btn")?.addEventListener("click", () => {
-    qrContainer.innerHTML = "";
-    const url = get("appstore-url");
-  
-    new QRCode(qrContainer, {
-      text: url,
-      width: 200,
-      height: 200,
-      colorDark: "#000",
-      colorLight: "#fff",
-      correctLevel: QRCode.CorrectLevel.H,
-    });
-  });
-  
-
-
-
-  // Event QR Code (VEVENT format)
-  document.getElementById("generate-event-btn")?.addEventListener("click", () => {
-    qrContainer.innerHTML = "";
-  
-    const start = new Date(get("event-start")).toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-    const end = new Date(get("event-end")).toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-  
-    const ical = `
-  BEGIN:VEVENT
-  SUMMARY:${get("event-title")}
-  DTSTART:${start}
-  DTEND:${end}
-  LOCATION:${get("event-location")}
-  DESCRIPTION:${get("event-description")}
-  END:VEVENT
-  `.trim();
-  
-    new QRCode(qrContainer, {
-      text: ical,
-      width: 200,
-      height: 200,
-      colorDark: "#000",
-      colorLight: "#fff",
-      correctLevel: QRCode.CorrectLevel.H,
-    });
-  });
-
-
-
-  
-  
-  // Payment QR Code (UPI format as example)
-  document.getElementById("generate-payment-btn")?.addEventListener("click", () => {
-    qrContainer.innerHTML = "";
-  
-    const upi = `upi://pay?pa=${get("payment-upi")}&pn=${get("payment-name")}&am=${get("payment-amount")}&cu=INR`;
-  
-    new QRCode(qrContainer, {
-      text: upi,
-      width: 200,
-      height: 200,
-      colorDark: "#000",
-      colorLight: "#fff",
-      correctLevel: QRCode.CorrectLevel.H,
-    });
-  });
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-  
-    // Helper
-    function get(id) {
-      return document.getElementById(id)?.value?.trim() || "";
-    }
-  });
   
