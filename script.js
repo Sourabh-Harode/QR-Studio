@@ -1,5 +1,4 @@
-// Wait for DOM to load
-document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", () => {
     const categories = document.querySelectorAll(".category");
     const formMap = {
       "URL": "url-form",
@@ -353,4 +352,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+  // Dark mode toggle
+  const toggleSwitch = document.getElementById('dark-mode-toggle');
+
+  toggleSwitch.addEventListener('change', function () {
+    document.body.classList.toggle('dark-mode');
+
+  });
   

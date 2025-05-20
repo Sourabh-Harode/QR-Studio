@@ -18,7 +18,13 @@
     </div>
     
     <nav class="nav">
-    
+      <label class="theme-switch" id="theme-toggle">
+        <input type="checkbox" id="dark-mode-toggle" />
+        <span class="slider">
+          <span class="icon moon">🌙</span>
+          <span class="icon sun">☀️</span>
+        </span>
+      </label>      
     </nav>
   </header>
 
@@ -499,8 +505,9 @@
   
   
     <!-- QR output section -->
-    
-    <div id="qr-code">
+    <div class="qr-container">
+    <div class="qr-wrapper">
+    <div id="qr-code"></div></div>
     </div class="download-button-block">
     <button id="download-btn" style="display: none;">Download QR code</button>
     <div>
@@ -528,15 +535,6 @@
         
             <button id="reset-btn">Reset</button>
           </div>
-          
-
-        
-
-
-
-
-
-
   </section>    
   </div>
 
@@ -572,7 +570,6 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
-
   <script src="script.js"></script>
 </body>
 </html>
