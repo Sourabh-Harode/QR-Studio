@@ -18,6 +18,7 @@
     justify-content: space-between;
     align-items: center;
     background: #eaf2ff;
+    background-image: linear-gradient(to left, #eaf2ff, #f8e8ff);
     padding: 0.9375rem 1.875rem; 
     box-shadow: 0 0.0625rem 0.25rem rgba(0, 0, 0, 0.1);
     position: sticky;
@@ -129,6 +130,7 @@
   .category.active {
     border-color: #007bff;
     background-color: #eaf2ff;
+    background-image: linear-gradient(to left, #eaf2ff, #f8e8ff);
   }
   
   /* Input Section */
@@ -160,19 +162,31 @@
     box-sizing: border-box;
   }
   
+
+
+  
   .input-form .form-row {
     display: flex;
     gap: 0.625rem;
     flex-wrap: wrap;
   }
+  
+
+
   .input-form .form-row input {
     flex: 1;
+  }
+
+  .input-form .form-row input:hover{
+    background-color: #eaf2ff;
+    background-image: linear-gradient(to left, #eaf2ff, #f8e8ff);
   }
   
   /* Buttons */
   .generate-button,
   [id^="generate-"] {
     background-color: #00aeef;
+    background-image: linear-gradient(to left, #03bcff, #3f83e8);
     color: white;
     border: none;
     padding: 0.75rem;
@@ -190,10 +204,13 @@
   .generate-button:hover,
   [id^="generate-"]:hover {
     background-color: #008fc4;
+    background-image: linear-gradient(to left, #008fc4, #065bda);
+
   }
   
   [id^="clear-"] {
     background-color: #ff8989;
+    background-image: linear-gradient(to left, #ff8989, #ff503d);
     color: white;
     border: none;
     padding: 0.3125rem;
@@ -208,6 +225,7 @@
   }
   [id^="clear-"]:hover {
     background-color: #de5151;
+    background-image: linear-gradient(to right, #b45252, #f91b02);
   }
   
   #qr-code {
@@ -229,9 +247,16 @@
     transition: transform 0.2s ease;
   }
   
-  #download-btn,
-  #reset-btn {
+
+
+
+
+
+
+
+  #download-btn{
     background-color: #00aeef;
+    background-image: linear-gradient(to left, #03bcff, #3f83e8);
     color: white;
     border: none;
     padding: 0.75rem;
@@ -243,16 +268,32 @@
     justify-content: center;
     transition: background-color 0.2s ease;
     margin: 1.25rem auto;
-    max-width: 300px;
+    margin-left: 41.5%;
+    margin-right: 41.5%;
+    max-width: 100%;
   }
   #download-btn:hover {
     background-color: #008fc4;
+    background-image: linear-gradient(to left, #008fc4, #065bda);
   }
   #reset-btn {
     background-color: #ff8989;
+    background-image: linear-gradient(to left, #ff8989, #ff503d);color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 2.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+    margin: 1.25rem auto;
+    max-width: 100%;
   }
   #reset-btn:hover {
     background-color: #de5151;
+    background-image: linear-gradient(to right, #b45252, #f91b02);
   }
   
   /* Color Settings */
@@ -262,10 +303,15 @@
     gap: 1rem;
     align-items: center;
     background: #eaf2ff;
+    
     padding: 1.25rem 1.5rem;
     border-radius: 1rem;
     box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
     margin: auto;
+  }
+  .color-settings:hover {
+    background: #f8e8ff;
+    background-image: linear-gradient(to right, #f8e8ff, #eaf2ff);
   }
   
   .input-group {
@@ -273,9 +319,15 @@
     align-items: center;
     gap: 0.5rem;
     background: white;
+    border: 1px solid #ccc;
     padding: 0.4rem 1rem;
     border-radius: 999px;
     box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.06);
+  }
+  .input-group:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
+    background-image: linear-gradient(to left, #ffffff, #f8e8ff);
   }
   .input-group label {
     font-size: 0.875rem;
@@ -288,7 +340,7 @@
     border-radius: 999px;
     padding: 0.35rem 1rem;
     font-size: 0.875rem;
-    background-color: #f0f0f0;
+    background-color: #eef4ff;
     appearance: none;
     cursor: pointer;
     transition: background-color 0.2s ease;
@@ -296,6 +348,7 @@
   .input-group select:hover {
     background-color: #e0e0e0;
     transform: scale(1.05);
+    background-image: linear-gradient(to left, #ffffff, #f8e8ff);
   }
   .input-group input[type="color"] {
     border: none;
@@ -309,6 +362,7 @@
   .input-group input[type="color"]:hover {
     background-color: #e0e0e0;
     transform: scale(1.05);
+    background-image: linear-gradient(to left, #ffffff, #f8e8ff);
   }
   
   /* Footer */
@@ -465,6 +519,7 @@
   
   .about-content a:hover {
     color: #008fc4;
+    ;
   }
   
   /* Responsive */
@@ -646,6 +701,23 @@
     .privacy-content h2 {
       font-size: 1.1rem;
     }
+  }
+
+
+
+  
+
+
+    /* payments beta badge */
+  .beta-badge {
+    background-color: #f39c12;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    line-height: 1;
   }
   
   

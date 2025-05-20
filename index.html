@@ -28,7 +28,7 @@
     <aside class="sidebar">
       <button class="category active">URL</button>
       <button class="category">VCARD</button>
-      <button class="category">TEXT</button>
+      <button class="category">PRODUCT</button>
       <button class="category">E-MAIL</button>
       <button class="category">SMS</button>
       <button class="category">WIFI</button>
@@ -37,7 +37,16 @@
       <button class="category">LOCATION</button>
       <button class="category">APP STORE</button>
       <button class="category">EVENT</button>
-      <button class="category">PAYMENT</button>
+      <button class="category">EVENT RVSP</button>
+      <button class="category">WHATSAPP</button>
+      <button class="category">TELEGRAM</button>
+      <button class="category">GOOGLE REVIEW</button>
+      <button class="category">BOOKING LINK</button>
+      <button class="category">CONTACT GROUP</button>
+      <button class="category">STORE INFO</button>
+
+      <button class="category">TEXT</button>
+      <button class="category">PAYMENT<span class="beta-badge">Beta</span></button>
     </aside>
 
     <!-- Input Section -->
@@ -61,14 +70,15 @@
       </div>
   
       <label>Contact:</label>
-      <input type="text" id="mobile" placeholder="Mobile" />
       <div class="form-row">
+        <input type="text" id="mobile" placeholder="Mobile" />
+      
         <input type="text" id="phone" placeholder="Phone" />
         <input type="text" id="fax" placeholder="Fax" />
       </div>
   
-      <label>Email:</label>
-      <input type="email" id="email" placeholder="your@email.com" />
+      <label>Email:</label><div class="form-row">
+      <input type="email" id="email" placeholder="your@email.com" /></div>
   
       <label>Company:</label>
       <div class="form-row">
@@ -76,8 +86,8 @@
         <input type="text" id="job" placeholder="Your Job" />
       </div>
   
-      <label>Street:</label>
-      <input type="text" id="street" placeholder="Street" />
+      <label>Street:</label><div class="form-row">
+      <input type="text" id="street" placeholder="Street" /></div>
   
       <label>City:</label>
       <div class="form-row">
@@ -85,14 +95,16 @@
         <input type="text" id="zip" placeholder="ZIP" />
       </div>
   
-      <label>State:</label>
+      <label>State:</label><div class="form-row">
       <input type="text" id="state" placeholder="State" />
+      
+    </div>
   
-      <label>Country:</label>
-      <input type="text" id="country" placeholder="Country" />
+      <label>Country:</label><div class="form-row">
+      <input type="text" id="country" placeholder="Country" /></div>
   
-      <label>Website:</label>
-      <input type="url" id="website" placeholder="www.your-website.com" />
+      <label>Website:</label><div class="form-row">
+      <input type="url" id="website" placeholder="www.your-website.com" /></div>
 
       <button type="button" id="clear-vcard-btn">Clear</button>
   
@@ -102,7 +114,7 @@
     </div>
 
     <!-- Email Form -->
-<div id="email-form" class="input-form" style="display: none;">
+    <div id="email-form" class="input-form" style="display: none;">
     <h2>Email QR Code</h2>
   
     <label>To:</label>
@@ -113,9 +125,9 @@
   
     <label>Message:</label>
     <textarea id="email-body" placeholder="Your message..."></textarea>
-  
+    <button type="button" id="clear-email-btn">Clear</button>
     <button id="generate-email-btn" class="generate-button">Generate QR Code</button>
-    <button type="button" id="clear-Email-btn">Clear</button>
+    
   </div>
   
   <!-- SMS Form -->
@@ -188,6 +200,66 @@
         <button id="generate-mecard-btn">Generate QR Code</button>
       </div>
 
+
+      <!-- Store Info Form -->
+<div id="store-info-form" class="input-form" style="display: none;">
+  <h2>Store Information QR Code</h2>
+
+  <label>Store Name:</label>
+  <div class="form-row">
+    <input type="text" id="store-name" placeholder="e.g. FreshMart" />
+  </div>
+
+  <label>Address:</label>
+  <div class="form-row">
+    <input type="text" id="store-address" placeholder="123 Market St, City, ZIP" />
+  </div>
+
+  <label>Phone Number:</label>
+  <div class="form-row">
+    <input type="tel" id="store-phone" placeholder="e.g. +1 234-567-8900" />
+  </div>
+
+  <label>Email:</label>
+  <div class="form-row">
+    <input type="email" id="store-email" placeholder="store@example.com" />
+  </div>
+
+  <label>Website:</label>
+  <div class="form-row">
+    <input type="url" id="store-website" placeholder="https://www.store.com" />
+  </div>
+
+  <label>Opening Hours:</label>
+  <div class="form-row">
+    <input type="text" id="store-hours" placeholder="Mon-Sat: 9AM - 9PM" />
+  </div>
+
+  <label>Google Maps Link:</label>
+  <div class="form-row">
+    <input type="url" id="store-map" placeholder="https://maps.google.com/..." />
+  </div>
+
+  <label>Instagram Handle:</label>
+  <div class="form-row">
+    <input type="text" id="store-instagram" placeholder="@yourstore" />
+  </div>
+
+  <label>Facebook Page:</label>
+  <div class="form-row">
+    <input type="url" id="store-facebook" placeholder="https://facebook.com/yourstore" />
+  </div>
+
+  <label>Short Description:</label>
+  <div class="form-row">
+    <textarea id="store-description" placeholder="Brief about your store..."></textarea>
+  </div>
+
+  <button type="button" id="clear-store-info-btn">Clear</button>
+  <button type="button" id="generate-store-info-btn">Generate QR Code</button>
+</div>
+
+
     <!-- Location Form -->
     <div id="location-form" class="input-form" style="display: none;">
         <h2>Location QR Code</h2>
@@ -203,26 +275,144 @@
         <button id="generate-location-btn">Generate QR Code</button>
       </div>
 
+      <!-- Google Reviews Form -->
+<div id="google-review-form" class="input-form" style="display: none;">
+  <h2>Google Review QR Code</h2>
+
+  <label>Google Place ID or Review Link:</label>
+  <div class="form-row">
+    <input type="url" id="google-review-link" placeholder="https://g.page/r/..." />
+  </div>
+
+  <button type="button" id="clear-google-review-btn">Clear</button>
+  <button id="generate-google-review-btn" class="generate-button">Generate QR Code</button>
+</div>
+
+<!-- Booking Link Form -->
+<div id="booking-form" class="input-form" style="display: none;">
+  <h2>Booking QR Code</h2>
+
+  <label>Booking Service Name:</label>
+  <div class="form-row">
+    <input type="text" id="booking-title" placeholder="e.g. Appointment with John" />
+  </div>
+
+  <label>Booking URL:</label>
+  <div class="form-row">
+    <input type="url" id="booking-url" placeholder="https://booking.com/..." />
+  </div>
+
+  <button type="button" id="clear-booking-btn">Clear</button>
+  <button id="generate-booking-btn" class="generate-button">Generate QR Code</button>
+</div>
+
+
+<!-- Event RSVP Form -->
+<div id="rsvp-form" class="input-form" style="display: none;">
+  <h2>Event RSVP QR Code</h2>
+
+  <label>Event Name:</label>
+  <div class="form-row">
+    <input type="text" id="rsvp-title" placeholder="e.g. John's Wedding" />
+  </div>
+
+  <label>RSVP Form URL:</label>
+  <div class="form-row">
+    <input type="url" id="rsvp-url" placeholder="https://forms.gle/..." />
+  </div>
+
+  <button type="button" id="clear-rsvp-btn">Clear</button>
+  <button id="generate-rsvp-btn" class="generate-button">Generate QR Code</button>
+</div>
+
+
+
+<!-- Contact Group QR Code -->
+<div id="contact-group-form" class="input-form" style="display: none;">
+  <h2>Contact Group QR Code</h2>
+
+  <label>Group Type:</label>
+  <select id="group-type">
+    <option value="whatsapp">WhatsApp Group</option>
+    <option value="telegram">Telegram Group</option>
+  </select>
+
+  <label>Group Invite Link:</label>
+  <div class="form-row">
+    <input type="url" id="group-link" placeholder="https://chat.whatsapp.com/..." />
+  </div>
+
+  <button type="button" id="clear-contact-group-btn">Clear</button>
+  <button id="generate-group-btn" class="generate-button">Generate QR Code</button>
+</div>
+
+
+
+<!-- WhatsApp Form -->
+<div id="whatsapp-form" class="input-form" style="display: none;">
+  <h2>WhatsApp QR Code</h2>
+
+  <label>Phone Number:</label>
+  <div class="form-row">
+    <input type="text" id="whatsapp-number" placeholder="e.g. +1234567890" />
+  </div>
+
+  <label>Message:</label>
+  <div class="form-row">
+    <textarea id="whatsapp-message" placeholder="Type your message..."></textarea>
+  </div>
+
+  <button type="button" id="clear-whatsapp-btn">Clear</button>
+  <button id="generate-whatsapp-btn" class="generate-button">Generate QR Code</button>
+</div>
+
+
+
+
+<!-- Telegram Form -->
+<div id="telegram-form" class="input-form" style="display: none;">
+  <h2>Telegram QR Code</h2>
+
+  <label>Username (without @):</label>
+  <div class="form-row">
+    <input type="text" id="telegram-username" placeholder="e.g. yourusername" />
+  </div>
+
+  <label>Optional Start Message (Bot or Chat):</label>
+  <div class="form-row">
+    <input type="text" id="telegram-start" placeholder="e.g. Hello or start=123" />
+  </div>
+
+  <button type="button" id="clear-telegram-btn">Clear</button>
+  <button id="generate-telegram-btn" class="generate-button">Generate QR Code</button>
+</div>
+
+
+
+
+
+
+
 
     <!-- Payment Form -->
-    <div id="payment-form" class="input-form" style="display: none;">
-        <h2>Payment QR Code</h2>
-      
+<div id="payment-form" class="input-form" style="display: none;">
+    <h2>Payment QR Code</h2>
+  
         <label>Amount:</label>
         <input type="text" id="payment-amount" placeholder="e.g. 10.00" />
-      
+  
         <label>Currency:</label>
         <input type="text" id="payment-currency" placeholder="e.g. USD" />
-      
+  
         <label>Message:</label>
         <textarea id="payment-message" placeholder="Payment for..."></textarea>
-        <button type="button" id="clear-payment-btn">Clear</button>
+    <button type="button" id="clear-payment-btn">Clear</button>
       
         <button id="generate-payment-btn">Generate QR Code</button>
-      </div> 
+  </div>
+  
+      
         
-
-
 
 
     <!-- appstore form -->
@@ -254,28 +444,77 @@
       
         <label>Description:</label>
         <textarea id="event-description" placeholder="Details about the event..."></textarea>
-      
+        <button type="button" id="clear-event-btn">Clear</button>
         <button id="generate-event-btn">Generate QR Code</button>
       </div>
+
+
+      <!-- Product Input Form -->
+  <div id="product-form" class="input-form" style="display: none;">
+    <h2>Product QR Code</h2>
+
+    <label>Product Name:</label>
+    <input type="text" id="product-name" placeholder="e.g. Wireless Earbuds" />
+
+    <label>Description:</label>
+   <textarea id="product-description" placeholder="Short product description..."></textarea>
+
+   <label>Price:</label>
+   <input type="text" id="product-price" placeholder="e.g. 49.99" />
+
+    <label>Currency:</label>
+    <input type="text" id="product-currency" placeholder="e.g. USD" />
+
+    <label>SKU:</label>
+    <input type="text" id="product-sku" placeholder="e.g. WB-12345" />
+
+    <label>Brand:</label>
+    <input type="text" id="product-brand" placeholder="e.g. SoundCore" />
+
+    <label>Category:</label>
+    <input type="text" id="product-category" placeholder="e.g. Electronics" />
+
+    <label>Availability:</label>
+    <select id="product-availability">
+      <option value="In Stock">In Stock</option>
+      <option value="Out of Stock">Out of Stock</option>
+      <option value="Preorder">Preorder</option>
+      <option value="Discontinued">Discontinued</option>
+    </select>
+
+    <label>Product URL:</label>
+   <input type="url" id="product-url" placeholder="https://example.com/product/123" />
+
+    <label>Image URL:</label>
+    <input type="url" id="product-image" placeholder="https://example.com/image.jpg" />
+
+
+    <button type="button" id="clear-product-btn">Clear</button>
+    <button id="generate-product-btn" class="generate-button">Generate QR Code</button>
+  
+</div>
+
           
   
   
   
     <!-- QR output section -->
     
-    <div id="qr-code"></div>
-    <button id="download-btn" style="display: none;">Download QR Code</button>
+    <div id="qr-code">
+    </div class="download-button-block">
+    <button id="download-btn" style="display: none;">Download QR code</button>
     <div>
 
         <!-- Color Settings -->
         <div class="color-settings">
-            <div class="input-group">
+        
+          <div class="input-group">
               <label for="color-type">Color Type:</label>
               <select id="color-type">
                 <option value="solid">Solid</option>
                 <option value="gradient">Gradient</option>
               </select>
-            </div>
+          </div>
           
             <div class="input-group">
               <label for="color-1">Primary:</label>
@@ -286,7 +525,7 @@
               <label for="color-2">Secondary:</label>
               <input type="color" id="color-2" value="#000000" />
             </div>
-          
+        
             <button id="reset-btn">Reset</button>
           </div>
           

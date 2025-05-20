@@ -13,7 +13,15 @@ document.addEventListener("DOMContentLoaded", () => {
       "APP STORE": "appstore-form",
       "EVENT": "event-form",
       "PAYMENT": "payment-form",
-      "ME-CARD": "mecard-form"
+      "ME-CARD": "mecard-form",
+      "PRODUCT": "product-form",
+      "WHATSAPP": "whatsapp-form",
+      "TELEGRAM": "telegram-form",
+      "EVENT RVSP": "rsvp-form",
+      "CONTACT GROUP": "contact-group-form",
+      "GOOGLE REVIEW": "google-review-form",
+      "BOOKING LINK": "booking-form",
+      "STORE INFO": "store-info-form",
     };
     const qrContainer = document.getElementById("qr-code");
     const downloadBtn = document.getElementById("download-btn");
@@ -128,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const generateBtn = document.getElementById("generate-btn");
     generateBtn?.addEventListener("click", () => createQRCode(get("qr-input")));
     urlInput?.addEventListener("input", () => createQRCode(get("qr-input")));
-
+ 
     
   
     // vCard QR Code
@@ -154,6 +162,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const message = get("sms-message");
       const smsText = `SMSTO:${number}:${message}`;
       createQRCode(smsText);
+    });
+
+    // Store Info QR Code
+    document.getElementById("generate-store-info-btn")?.addEventListener("click", () => {
+      const storeName = get("store-name");
+      const storeAddress = get("store-address");
+      const storePhone = get("store-phone");
+      const storeWebsite = get("store-website");
+      const storeInfoText = `Store Name: ${storeName}\nAddress: ${storeAddress}\nPhone: ${storePhone}\nWebsite: ${storeWebsite}`;
+      createQRCode(storeInfoText);
     });
   
     // WiFi QR Code
@@ -186,6 +204,35 @@ document.addEventListener("DOMContentLoaded", () => {
       const lng = get("location-lng");
       createQRCode(`geo:${lat},${lng}`);
     });
+
+    // Google Review QR Code
+    document.getElementById("generate-google-review-btn")?.addEventListener("click", () => {
+      const placeId = get("google-review-place-id");
+      const reviewText = get("google-review-text");
+      createQRCode(`https://search.google.com/local/writereview?placeid=${placeId}&reviewtext=${encodeURIComponent(reviewText)}`);
+    });
+
+    // Booking QR Code
+    document.getElementById("generate-booking-btn")?.addEventListener("click", () => {
+      const bookingUrl = get("booking-url");
+      const bookingText = get("booking-text");
+      createQRCode(`https://www.booking.com/review/${bookingUrl}?text=${encodeURIComponent(bookingText)}`);
+    });
+
+    // RVSP QR Code
+    document.getElementById("generate-rsvp-btn")?.addEventListener("click", () => {
+      const rsvpUrl = get("rsvp-url");
+      const rsvpText = get("rsvp-text");
+      createQRCode(`https://www.eventbrite.com/e/${rsvpUrl}?text=${encodeURIComponent(rsvpText)}`);
+    });
+
+    // Contact Group QR Code
+    document.getElementById("generate-contact-group-btn")?.addEventListener("click", () => {
+      const groupName = get("contact-group-name");
+      const groupMembers = get("contact-group-members").split(",").map(member => member.trim());
+      const contactGroupText = `BEGIN:VCARD\nVERSION:3.0\nFN:${groupName}\n${groupMembers.map(member => `N:${member}`).join("\n")}\nEND:VCARD`;
+      createQRCode(contactGroupText);
+    });
   
     // App Store QR Code
     document.getElementById("generate-appstore-btn")?.addEventListener("click", () => {
@@ -199,12 +246,53 @@ document.addEventListener("DOMContentLoaded", () => {
       const ical = `BEGIN:VEVENT\nSUMMARY:${get("event-title")}\nDTSTART:${start}\nDTEND:${end}\nLOCATION:${get("event-location")}\nDESCRIPTION:${get("event-description")}\nEND:VEVENT`;
       createQRCode(ical);
     });
-  
-    // Payment QR Code
-    document.getElementById("generate-payment-btn")?.addEventListener("click", () => {
-      const upi = `upi://pay?pa=${get("payment-upi")}&pn=${get("payment-name")}&am=${get("payment-amount")}&cu=INR`;
-      createQRCode(upi);
+
+    // Product QR Code
+    document.getElementById("generate-product-btn")?.addEventListener("click", () => {
+      const product = `Product Name: ${get("product-name")}\nPrice: ${get("product-price")}\nDescription: ${get("product-description")}`;
+      createQRCode(product);
     });
+
+    // WhatsApp QR Code
+    document.getElementById("generate-whatsapp-btn")?.addEventListener("click", () => {
+      const number = get("whatsapp-number");
+      const message = get("whatsapp-message");
+      const whatsappText = `https://api.whatsapp.com/send?phone=${number}&text=${encodeURIComponent(message)}`;
+      createQRCode(whatsappText);
+    });
+    // Telegram QR Code
+    document.getElementById("generate-telegram-btn")?.addEventListener("click", () => {
+      const username = get("telegram-username");
+      const message = get("telegram-message");
+      const telegramText = `https://t.me/${username}?text=${encodeURIComponent(message)}`;
+      createQRCode(telegramText);
+    });
+  
+    
+   // Payment QR Code
+   document.getElementById("generate-payment-btn")?.addEventListener("click", () => {
+    const method = get("payment-method");
+    let data = "";
+
+    if (method === "upi") {
+      data = `upi://pay?pa=${encodeURIComponent(get("upi-id"))}&pn=${encodeURIComponent(get("payment-name"))}&cu=INR`;
+      const note = get("payment-message");
+      if (note) data += `&tn=${encodeURIComponent(note)}`;
+    } else if (method === "bank") {
+      data = `Bank Account: ${get("account-number")}\nIFSC Code: ${get("ifsc")}\nAccount Holder: ${get("account-name")}`;
+      const note = get("payment-message");
+      if (note) data += `\nNote: ${note}`;
+    }
+
+    createQRCode(data);
+  });
+
+
+  
+
+
+
+
   });
   
 
@@ -262,4 +350,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("clear-payment-btn")?.addEventListener("click", () => clearFormFields("payment-form"));
   document.getElementById("clear-mecard-btn")?.addEventListener("click", () => clearFormFields("mecard-form"));
   
+
+
+
   
