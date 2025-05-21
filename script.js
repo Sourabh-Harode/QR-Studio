@@ -376,4 +376,3 @@ if (toggleSwitch) {
     }
   });
 }
-
