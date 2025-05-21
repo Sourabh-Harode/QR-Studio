@@ -82,7 +82,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem 1.25rem;
-    background: transparent);
+    background: transparent;
   }
     .nav a {
         text-decoration: none;
@@ -166,6 +166,18 @@
     font-size: 1rem;
     box-sizing: border-box;
   }
+  .input-form textarea:hover,
+  .input-form input:hover,
+  .input-form select:hover {
+    background-color: #eaf2ff;
+    background-image: linear-gradient(to left, #eaf2ff, #f8e8ff);
+  }
+  .dark-mode .input-form textarea:hover,
+  .dark-mode .input-form input:hover,
+  .dark-mode .input-form select:hover {
+    background-color: #1e1e1e;
+    background-image: linear-gradient(to right, #131623, #242425);
+  }
   
 
 
@@ -185,6 +197,10 @@
   .input-form .form-row input:hover{
     background-color: #eaf2ff;
     background-image: linear-gradient(to left, #eaf2ff, #f8e8ff);
+  }
+  .dark-mode .input-form .form-row input:hover{
+    background-color: #1e1e1e;
+    background-image: linear-gradient(to right, #131623, #242425);
   }
   
   /* Buttons */
