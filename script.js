@@ -352,11 +352,28 @@
 
 
 
-  // Dark mode toggle
-  const toggleSwitch = document.getElementById('dark-mode-toggle');
+ // Dark mode toggle
+const toggleSwitch = document.getElementById('dark-mode-toggle');
 
-  toggleSwitch.addEventListener('change', function () {
-    document.body.classList.toggle('dark-mode');
+// Apply saved mode on load
+document.addEventListener("DOMContentLoaded", () => {
+  const darkMode = localStorage.getItem("darkMode");
+  if (darkMode === "enabled") {
+    document.body.classList.add("dark-mode");
+    if (toggleSwitch) toggleSwitch.checked = true;
+  }
+});
 
+// Toggle and save mode
+if (toggleSwitch) {
+  toggleSwitch.addEventListener("change", () => {
+    if (toggleSwitch.checked) {
+      document.body.classList.add("dark-mode");
+      localStorage.setItem("darkMode", "enabled");
+    } else {
+      document.body.classList.remove("dark-mode");
+      localStorage.setItem("darkMode", "disabled");
+    }
   });
-  
+}
+

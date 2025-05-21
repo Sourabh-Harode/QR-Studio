@@ -17,6 +17,13 @@
     </div>
     <nav class="nav">
       <a href="index.html" class="nav-link">🏠︎</a>
+      <label class="theme-switch" id="theme-toggle">
+        <input type="checkbox" id="dark-mode-toggle" />
+        <span class="slider">
+          <span class="icon moon">⏾</span>
+          <span class="icon sun">☀︎</span>
+        </span>
+      </label> 
     </nav>
   </header>
 
@@ -99,3 +106,30 @@
   
 </body>
 </html>
+
+
+
+<script>// Dark mode toggle
+  const toggleSwitch = document.getElementById('dark-mode-toggle');
+  
+  // Apply saved mode on load
+  document.addEventListener("DOMContentLoaded", () => {
+    const darkMode = localStorage.getItem("darkMode");
+    if (darkMode === "enabled") {
+      document.body.classList.add("dark-mode");
+      if (toggleSwitch) toggleSwitch.checked = true;
+    }
+  });
+  
+  // Toggle and save mode
+  if (toggleSwitch) {
+    toggleSwitch.addEventListener("change", () => {
+      if (toggleSwitch.checked) {
+        document.body.classList.add("dark-mode");
+        localStorage.setItem("darkMode", "enabled");
+      } else {
+        document.body.classList.remove("dark-mode");
+        localStorage.setItem("darkMode", "disabled");
+      }
+    });
+  }</script>
